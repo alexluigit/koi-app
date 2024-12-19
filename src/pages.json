@@ -6,18 +6,9 @@
     }
   },
   "pages": [
-    {
-      "path": "pages/tab/home/index",
-      "style": { "navigationStyle": "custom" }
-    },
-    {
-      "path": "pages/tab/category/index",
-      "style": { "navigationBarTitleText": "品类" }
-    },
-    {
-      "path": "pages/tab/cart/index",
-      "style": { "navigationBarTitleText": "购物车" }
-    },
+    { "path": "pages/tab/home/index", "style": { "navigationStyle": "custom" } },
+    { "path": "pages/tab/category/category", "style": { "navigationBarTitleText": "全部品类" } },
+    { "path": "pages/tab/cart/index", "style": { "navigationBarTitleText": "购物车" } },
     {
       "path": "pages/tab/user/index",
       "style": { "navigationStyle": "custom" },
@@ -28,14 +19,8 @@
     {
       "root": "pages/common",
       "pages": [
-        {
-          "path": "login",
-          "style": { "navigationBarTitleText": "登录" }
-        },
-        {
-          "path": "404",
-          "style": { "navigationBarTitleText": "404" }
-        }
+        { "path": "login", "style": { "navigationBarTitleText": "登录" } },
+        { "path": "404", "style": { "navigationBarTitleText": "404" } }
       ]
     }
   ],
@@ -58,7 +43,7 @@
     }, {
       "iconPath": "static/images/tabbar/category.png",
       "selectedIconPath": "static/images/tabbar/category_selected.png",
-      "pagePath": "pages/tab/category/index",
+      "pagePath": "pages/tab/category/category",
       "text": "品类"
     }, {
       "iconPath": "static/images/tabbar/cart.png",
