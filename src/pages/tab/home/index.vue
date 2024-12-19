@@ -9,12 +9,13 @@
       @refresherrefresh="onRefresherrefresh"
       @scrolltolower="onScrollToLower"
     >
-      <template>
+      <!-- <PageSkeleton v-if="isLoading" /> -->
+      <view>
         <custom-swiper :list="bannerList" />
         <home-category-panel :list="categoryList" />
         <home-hot-panel :list="hotList" />
         <guess-like ref="guessRef" />
-      </template>
+      </view>
     </scroll-view>
   </view>
 </template>
