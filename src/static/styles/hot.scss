@@ -1,0 +1,58 @@
+/* 热门推荐 */
+.hot {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 508rpx;
+  margin: 20rpx 20rpx 0;
+  background-color: #fff;
+  border-radius: 10rpx;
+
+  .title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 24rpx 24rpx 0;
+    font-size: 32rpx;
+    color: #262626;
+
+    .title-desc {
+      margin-left: 18rpx;
+      font-size: 24rpx;
+      color: #7f7f7f;
+    }
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 254rpx;
+    border-top: 1rpx solid #eee;
+    border-right: 1rpx solid #eee;
+
+    .title {
+      justify-content: start;
+    }
+
+    &:nth-child(2n) {
+      border-right: 0 none;
+    }
+
+    &:nth-child(-n + 2) {
+      border-top: 0 none;
+    }
+
+    .image {
+      width: 150rpx;
+      height: 150rpx;
+    }
+  }
+
+  .cards {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15rpx 20rpx;
+  }
+}
