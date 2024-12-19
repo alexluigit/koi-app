@@ -11,9 +11,9 @@ declare module 'vue' {
     Badge: typeof import('./../src/components/badge.vue')['default']
     CustomSwiper: typeof import('./../src/components/custom-swiper.vue')['default']
     GuessLike: typeof import('./../src/components/guess-like.vue')['default']
-    HomeCategoryPanel: typeof import('./../src/components/home/home-category-panel.vue')['default']
-    HomeHotPanel: typeof import('./../src/components/home/home-hot-panel.vue')['default']
-    HomeNavbar: typeof import('./../src/components/home/home-navbar.vue')['default']
+    HomeCategoryPanel: typeof import('./../src/pages/tab/home/components/home-category-panel.vue')['default']
+    HomeHotPanel: typeof import('./../src/pages/tab/home/components/home-hot-panel.vue')['default']
+    HomeNavbar: typeof import('./../src/pages/tab/home/components/home-navbar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

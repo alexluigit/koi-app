@@ -19,8 +19,10 @@ export default function createVitePlugins(isBuild: boolean) {
       dts: 'types/auto-imports.d.ts',
       vueTemplate: true,
     }),
-    // 自动按需引入组件 (注意：需注册至 uni 之前，否则不会生效)
-    Components({ dts: 'types/components.d.ts' }),
+    Components({  // component auto import should comes before uni()
+      dirs: ['src/components', 'src/pages/**/**/components'],
+      dts: 'types/components.d.ts'
+    }),
     uni(),
     ViteRestart({ restart: ['vite.config.ts'] })
   ];

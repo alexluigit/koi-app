@@ -3,7 +3,7 @@
     <view class="logo">
       <image class="logo-image" src="@/static/images/logo.png" />
       <text class="logo-text">
-        多样 · 亲民 · 快捷
+        美好触手可及
       </text>
     </view>
     <view class="search">

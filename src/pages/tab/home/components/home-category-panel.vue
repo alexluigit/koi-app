@@ -22,5 +22,5 @@ defineProps<{ list: CategoryItem[] }>();
 </script>
 
 <style lang="scss">
-@import '@/static/styles/category.scss';
+@import '../styles/category.scss';
 </style>

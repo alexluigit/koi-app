@@ -31,5 +31,5 @@ defineProps<{
 </script>
 
 <style lang="scss">
-@import '@/static/styles/hot.scss';
+@import '../styles/hot.scss';
 </style>
