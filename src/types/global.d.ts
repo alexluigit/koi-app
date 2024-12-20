@@ -1,4 +1,3 @@
-/** 通用分页结果类型 */
 export interface PageResult<T> {
   /** 列表数据 */
   items: T[];
@@ -12,7 +11,6 @@ export interface PageResult<T> {
   pageSize: number;
 }
 
-/** 通用分页参数类型 */
 export interface PageParams {
   /** 页码：默认值为 1 */
   page?: number;
@@ -21,7 +19,7 @@ export interface PageParams {
 }
 
 /** 通用商品类型 */
-export interface GoodsItem {
+export interface ProductItem {
   /** 商品描述 */
   desc: string;
   /** 商品折扣 */

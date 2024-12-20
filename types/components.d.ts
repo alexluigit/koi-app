@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AddressPanel: typeof import('./../src/pages/common/product/components/address-panel.vue')['default']
     AgreePrivacy: typeof import('./../src/components/agree-privacy/index.vue')['default']
     Badge: typeof import('./../src/components/badge.vue')['default']
     CustomSwiper: typeof import('./../src/components/custom-swiper.vue')['default']
@@ -16,5 +17,6 @@ declare module 'vue' {
     HomeNavbar: typeof import('./../src/pages/tab/home/components/home-navbar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ServicePanel: typeof import('./../src/pages/common/product/components/service-panel.vue')['default']
   }
 }

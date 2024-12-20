@@ -1,8 +1,8 @@
 import type { AddressItem } from './address';
-import type { GoodsItem } from './global';
+import type { ProductItem } from './global';
 
 /** 商品信息 */
-export interface GoodsResult {
+export interface ProductResult {
   /** id */
   id: string;
   /** 商品名称 */
@@ -18,7 +18,7 @@ export interface GoodsResult {
   /** 主图图片集合[ 主图图片链接 ] */
   mainPictures: string[];
   /** 同类商品[ 商品信息 ] */
-  similarProducts: GoodsItem[];
+  similarProducts: ProductItem[];
   /** sku集合[ sku信息 ] */
   skus: SkuItem[];
   /** 可选规格集合备注[ 可选规格信息 ] */
