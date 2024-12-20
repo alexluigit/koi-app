@@ -1,11 +1,11 @@
+import { isLogin } from '@/utils/auth';
 import {
   ERROR404_PATH,
   isPathExists,
   LOGIN_PATH,
   removeQueryString,
   routes,
-} from '@/router';
-import { isLogin } from '@/utils/auth';
+} from '@/utils/router';
 
 const whiteList = ['/'];
 routes.forEach((item) => {

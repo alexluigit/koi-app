@@ -10,7 +10,7 @@
           uni-app
         </view>
         <view class="u-tips-color font-size-28rpx" @click="toCopy">
-          微信号:uni-app
+          微信号: 锦鲤福利
         </view>
       </view>
       <view class="ml-10rpx p-10rpx">
@@ -30,7 +30,6 @@
     <view class="mt-20rpx bg-white">
       <u-cell-group>
         <u-cell icon="star" title="收藏" is-link />
-        <u-cell icon="photo" title="相册" is-link />
         <u-cell icon="coupon" title="卡券" is-link />
         <u-cell icon="heart" title="关注" is-link />
       </u-cell-group>
@@ -58,7 +57,7 @@ const toCopy = async () => {
 
 // 登录鉴权，微信小程序端点击tabbar的底层逻辑不触发uni.switchTab，需要在页面onShow生命周期中校验权限
 onShow(async () => {
-  uni.clearStorageSync();
+  // uni.clearStorageSync();
   const hasPermission = await usePermission();
   console.log(hasPermission ? '已登录' : '未登录，拦截跳转');
 });
