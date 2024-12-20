@@ -1,9 +1,9 @@
 import type { PluginOption } from 'vite';
 import uni from '@dcloudio/vite-plugin-uni';
-import ViteRestart from 'vite-plugin-restart';
-import Components from 'unplugin-vue-components/vite';
 import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
 import viteImagemin from 'vite-plugin-imagemin';
+import ViteRestart from 'vite-plugin-restart';
 
 /**
  * @name createVitePlugins
@@ -19,12 +19,12 @@ export default function createVitePlugins(isBuild: boolean) {
       dts: 'types/auto-imports.d.ts',
       vueTemplate: true,
     }),
-    Components({  // component auto import should comes before uni()
+    Components({ // component auto import should comes before uni()
       dirs: ['src/components', 'src/pages/**/**/components'],
-      dts: 'types/components.d.ts'
+      dts: 'types/components.d.ts',
     }),
     uni(),
-    ViteRestart({ restart: ['vite.config.ts'] })
+    ViteRestart({ restart: ['vite.config.ts'] }),
   ];
 
   if (isBuild) {
@@ -36,8 +36,8 @@ export default function createVitePlugins(isBuild: boolean) {
         pngquant: {
           quality: [0.8, 0.9],
           speed: 4,
-        }
-      })
+        },
+      }),
     ];
     vitePlugins.push(...buildPlugins);
   }

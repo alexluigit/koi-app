@@ -24,6 +24,7 @@
     "plugins": ["@uni-helper/uni-app-types/volar-plugin"]
   },
   "include": [
+    "vite.*.ts",
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
