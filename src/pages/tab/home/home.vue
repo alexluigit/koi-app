@@ -38,35 +38,25 @@ const guessRef = ref();
 const bannerList = ref<BannerItem[]>([]);
 const categoryList = ref<CategoryItem[]>([]);
 const hotList = ref<HotItem[]>([]);
-const getHomeBannerData = async () => {
+
+const requestHomepageData = async () => {
   bannerList.value = await getHomeBannerAPI();
-};
-const getHomeCategoryData = async () => {
   categoryList.value = await getHomeCategoryAPI();
-};
-const getHomeHotData = async () => {
   hotList.value = await getHomeHotAPI();
 };
+
 const onRefresherrefresh = async () => {
   isRefresherTriggered.value = true;
   guessRef.value.resetData();
-  await Promise.all([
-    getHomeBannerData(),
-    getHomeCategoryData(),
-    getHomeHotData(),
-    guessRef.value.getMore(),
-  ]);
+  await requestHomepageData();
   isRefresherTriggered.value = false;
 };
+
 const onScrollToLower = () => guessRef.value?.getMore();
 
 onLoad(async () => {
   isLoading.value = true;
-  await Promise.all([
-    getHomeBannerData(),
-    getHomeCategoryData(),
-    getHomeHotData(),
-  ]);
+  await requestHomepageData();
   isLoading.value = false;
 });
 </script>

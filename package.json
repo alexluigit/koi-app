@@ -68,6 +68,7 @@
     "@rollup/rollup-darwin-arm64": "4.24.0",
     "@rollup/rollup-darwin-x64": "4.24.0",
     "@uni-helper/uni-app-types": "1.0.0-alpha.6",
+    "@uni-helper/uni-ui-types": "1.0.0-alpha.6",
     "@vue/runtime-core": "^3.4.30",
     "eslint": "^9.13.0",
     "lint-staged": "^15.2.10",

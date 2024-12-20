@@ -1,4 +1,4 @@
-import type { GoodsItem } from './global';
+import type { ProductItem } from './global';
 
 /** 一级分类项 */
 export interface CategoryTopItem {
@@ -17,7 +17,7 @@ export interface CategoryTopItem {
 /** 二级分类项 */
 export interface CategoryChildItem {
   /** 商品集合[ 商品项 ] */
-  goods: GoodsItem[];
+  goods: ProductItem[];
   /** 二级分类id */
   id: string;
   /** 二级分类名称 */

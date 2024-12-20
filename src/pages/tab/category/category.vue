@@ -4,12 +4,12 @@
     <view class="search">
       <view class="input">
         <text class="icon-search">
-          女靴
+          电饭煲
         </text>
       </view>
     </view>
     <view class="categories">
-      <!-- 左侧：一级分类 -->
+      <!-- Left side: toplevel category -->
       <scroll-view class="primary" scroll-y>
         <view
           v-for="(item, index) in categoryList"
@@ -23,7 +23,7 @@
           </text>
         </view>
       </scroll-view>
-      <!-- 右侧：二级分类 -->
+      <!-- Right side: secondary category -->
       <scroll-view enable-back-to-top class="secondary" scroll-y>
         <custom-swiper class="banner" :list="bannerList" />
         <view v-for="item in subCategoryList" :key="item.id" class="panel">
@@ -37,22 +37,22 @@
           </view>
           <view class="section">
             <navigator
-              v-for="goods in item.goods"
-              :key="goods.id"
-              class="goods"
+              v-for="product in item.goods"
+              :key="product.id"
+              class="product"
               hover-class="none"
-              :url="`/pages/goods/goods?id=${goods.id}`"
+              :url="`/pages/common/product/product?id=${product.id}`"
             >
-              <image class="image" :src="goods.picture" />
+              <image class="image" :src="product.picture" />
               <view class="name ellipsis">
-                {{ goods.name }}
+                {{ product.name }}
               </view>
               <view class="price">
                 <text class="symbol">
                   ¥
                 </text>
                 <text class="number">
-                  {{ goods.price }}
+                  {{ product.price }}
                 </text>
               </view>
             </navigator>

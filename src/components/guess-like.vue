@@ -9,7 +9,7 @@
       v-for="item in guessList"
       :key="item.id"
       class="guess-item"
-      :url="`/pages/goods/goods?id=${item.id}`"
+      :url="`/pages/common/product/product?id=${item.id}`"
     >
       <image class="image" mode="aspectFill" :src="item.picture" />
       <view class="name">
@@ -39,11 +39,8 @@ const pageParams: Required<PageParams> = {
 };
 
 const guessList = ref<GuessItem[]>([]);
-// 已结束标记
 const finish = ref(false);
-// 获取猜你喜欢数据
-const getHomeGoodsGuessLikeData = async () => {
-  // 退出分页判断
+const getGuessLikeData = async () => {
   if (finish.value === true) {
     return uni.showToast({ icon: 'none', title: '没有更多数据~' });
   }
@@ -52,20 +49,15 @@ const getHomeGoodsGuessLikeData = async () => {
   if (pageParams.page < res.pages) pageParams.page++;
   else finish.value = true;
 };
-// 重置数据
 const resetData = () => {
   pageParams.page = 1;
   guessList.value = [];
   finish.value = false;
 };
-// 组件挂载完毕
-onMounted(() => {
-  getHomeGoodsGuessLikeData();
-});
-// 暴露方法
+onMounted(() => getGuessLikeData());
 defineExpose({
   resetData,
-  getMore: getHomeGoodsGuessLikeData,
+  getMore: getGuessLikeData,
 });
 </script>
 
@@ -74,7 +66,6 @@ defineExpose({
   display: block;
 }
 
-/* 分类标题 */
 .caption {
   display: flex;
   justify-content: center;
@@ -101,7 +92,6 @@ defineExpose({
   }
 }
 
-/* 猜你喜欢 */
 .guess {
   display: flex;
   flex-wrap: wrap;
@@ -145,7 +135,7 @@ defineExpose({
     font-size: 80%;
   }
 }
-// 加载提示文字
+
 .loading-text {
   padding: 20rpx 0;
   font-size: 28rpx;

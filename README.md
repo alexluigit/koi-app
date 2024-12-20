@@ -4,4 +4,3 @@ To use UnoCSS, follow the instructions from:
 https://github.com/oven-sh/bun/issues/13076
 
 ## TODO
-1. `goods*` -> `good` ?
