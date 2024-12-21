@@ -6,29 +6,39 @@
     }
   },
   "pages": [
-    { "path": "pages/tab/home/home", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/tab/category/category", "style": { "navigationBarTitleText": "全部品类" } },
-    { "path": "pages/tab/cart/cart", "style": { "navigationBarTitleText": "购物车" } },
+    { "path": "pages/home/home", "style": { "navigationStyle": "custom" } },
+    { "path": "pages/category/category", "style": { "navigationBarTitleText": "全部品类" } },
+    { "path": "pages/cart/cart", "style": { "navigationBarTitleText": "购物车" } },
     {
-      "path": "pages/tab/user/user",
+      "path": "pages/user/user",
       "style": { "navigationStyle": "custom" },
       "needLogin": true
-    },
-    { "path": "pages/tab/user/settings", "style": { "navigationBarTitleText": "用户设置" } },
+    }
   ],
   "subPackages": [
     {
+      "root": "pages/account",
+      "pages": [
+        { "path": "login", "style": { "navigationBarTitleText": "登录" } },
+        { "path": "settings", "style": { "navigationBarTitleText": "用户设置" } }
+      ]
+    },
+    {
       "root": "pages/common",
       "pages": [
-        { "path": "product/product", "style": { "navigationBarTitleText": "商品详情" } },
-        { "path": "login", "style": { "navigationBarTitleText": "登录" } },
         { "path": "protocol", "style": { "navigationBarTitleText": "服务协议" } },
         { "path": "404", "style": { "navigationBarTitleText": "404" } }
+      ]
+    },
+    {
+      "root": "pages/product",
+      "pages": [
+        { "path": "product", "style": { "navigationBarTitleText": "商品详情" } }
       ]
     }
   ],
   "preloadRule": {
-    "pages/tab/home/home": {
+    "pages/home/home": {
       "network": "all",
       "packages": ["pages/common"]
     }
@@ -41,22 +51,22 @@
     "list": [{
       "iconPath": "static/images/tabbar/home.png",
       "selectedIconPath": "static/images/tabbar/home_selected.png",
-      "pagePath": "pages/tab/home/home",
+      "pagePath": "pages/home/home",
       "text": "首页"
     }, {
       "iconPath": "static/images/tabbar/category.png",
       "selectedIconPath": "static/images/tabbar/category_selected.png",
-      "pagePath": "pages/tab/category/category",
+      "pagePath": "pages/category/category",
       "text": "品类"
     }, {
       "iconPath": "static/images/tabbar/cart.png",
       "selectedIconPath": "static/images/tabbar/cart_selected.png",
-      "pagePath": "pages/tab/cart/cart",
+      "pagePath": "pages/cart/cart",
       "text": "购物车"
     }, {
       "iconPath": "static/images/tabbar/my.png",
       "selectedIconPath": "static/images/tabbar/my_selected.png",
-      "pagePath": "pages/tab/user/user",
+      "pagePath": "pages/user/user",
       "text": "我的"
     }]
   },

@@ -1,14 +1,14 @@
 import pagesJson from '@/pages.json';
 
-export const HOME_PATH = '/pages/tab/home/home';
-export const USER_PATH = '/pages/tab/user/user';
+export const HOME_PATH = '/pages/home/home';
+export const USER_PATH = '/pages/user/user';
 export const LOGIN_PATH = '/pages/common/login';
 export const ERROR404_PATH = '/pages/common/404';
 
 /**
  * Parse the routes defined in pages.json
  * @param {object} pagesJson
- * @returns [{"path": "/pages/tab/home/index","needLogin": false},...]
+ * @returns [{"path": "/pages/home/home","needLogin": false},...]
  */
 function parseRoutes(pagesJson = {} as any) {
   if (!pagesJson.pages) {

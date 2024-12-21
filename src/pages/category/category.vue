@@ -41,7 +41,7 @@
               :key="product.id"
               class="product"
               hover-class="none"
-              :url="`/pages/common/product/product?id=${product.id}`"
+              :url="`/pages/product/product?id=${product.id}`"
             >
               <image class="image" :src="product.picture" />
               <view class="name ellipsis">

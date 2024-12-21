@@ -2,7 +2,7 @@
   <view class="viewport">
     <!-- 列表1 -->
     <view v-if="userStore.profile" class="list">
-      <navigator url="/pagesMember/address/address" hover-class="none" class="item arrow">
+      <navigator url="/pages/account/address/address" hover-class="none" class="item arrow">
         我的收货地址
       </navigator>
     </view>

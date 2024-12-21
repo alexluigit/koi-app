@@ -5,7 +5,7 @@
       :key="item.id"
       class="category-item"
       hover-class="none"
-      url="/pages/tab/home/index"
+      url="/pages/common/404"
     >
       <image class="icon" :src="item.icon" />
       <text class="text">

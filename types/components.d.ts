@@ -7,15 +7,15 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AddressPanel: typeof import('./../src/pages/common/product/components/address-panel.vue')['default']
+    AddressPanel: typeof import('./../src/pages/product/components/address-panel.vue')['default']
     AgreePrivacy: typeof import('./../src/components/agree-privacy.vue')['default']
     CustomSwiper: typeof import('./../src/components/custom-swiper.vue')['default']
     GuessLike: typeof import('./../src/components/guess-like.vue')['default']
-    HomeCategoryPanel: typeof import('./../src/pages/tab/home/components/home-category-panel.vue')['default']
-    HomeHotPanel: typeof import('./../src/pages/tab/home/components/home-hot-panel.vue')['default']
-    HomeNavbar: typeof import('./../src/pages/tab/home/components/home-navbar.vue')['default']
+    HomeCategoryPanel: typeof import('./../src/pages/home/components/home-category-panel.vue')['default']
+    HomeHotPanel: typeof import('./../src/pages/home/components/home-hot-panel.vue')['default']
+    HomeNavbar: typeof import('./../src/pages/home/components/home-navbar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    ServicePanel: typeof import('./../src/pages/common/product/components/service-panel.vue')['default']
+    ServicePanel: typeof import('./../src/pages/product/components/service-panel.vue')['default']
   }
 }
