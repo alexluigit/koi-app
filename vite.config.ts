@@ -3,7 +3,7 @@ import process from 'node:process';
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig, loadEnv } from 'vite';
 import createVitePlugins from './build/plugins';
-// import { createViteProxy } from './build/proxy';
+import { createViteProxy } from './build/proxy';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }): UserConfig => {
@@ -34,7 +34,7 @@ export default defineConfig(({ command, mode }): UserConfig => {
       host: true,
       open: true,
       // proxy only works on h5, probably an issue of `vite-plugin-uni`
-      // proxy: createViteProxy(env),
+      proxy: createViteProxy(env),
     },
     // 设置scss的api类型为modern-compiler
     css: {

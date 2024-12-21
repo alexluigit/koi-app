@@ -1,5 +1,8 @@
-import type { AppState } from './types';
 import { defineStore } from 'pinia';
+
+interface AppState {
+  systemInfo: UniApp.GetSystemInfoResult;
+}
 
 const useAppStore = defineStore('app', {
   state: (): AppState => ({

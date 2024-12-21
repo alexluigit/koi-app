@@ -8,8 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AddressPanel: typeof import('./../src/pages/common/product/components/address-panel.vue')['default']
-    AgreePrivacy: typeof import('./../src/components/agree-privacy/index.vue')['default']
-    Badge: typeof import('./../src/components/badge.vue')['default']
+    AgreePrivacy: typeof import('./../src/components/agree-privacy.vue')['default']
     CustomSwiper: typeof import('./../src/components/custom-swiper.vue')['default']
     GuessLike: typeof import('./../src/components/guess-like.vue')['default']
     HomeCategoryPanel: typeof import('./../src/pages/tab/home/components/home-category-panel.vue')['default']

@@ -21,9 +21,7 @@ routes.forEach((item) => {
  */
 export function hasPerm(path: string = ''): boolean {
   if (!isPathExists(path) && path !== '/') {
-    uni.redirectTo({
-      url: ERROR404_PATH,
-    });
+    uni.redirectTo({ url: ERROR404_PATH });
     return false;
   }
   const hasPermission

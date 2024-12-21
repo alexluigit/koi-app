@@ -11,6 +11,7 @@
     >
       <!-- <PageSkeleton v-if="isLoading" /> -->
       <view>
+        <!-- <button @click="handleLogin">login here</button> -->
         <custom-swiper :list="bannerList" />
         <home-category-panel :list="categoryList" />
         <home-hot-panel :list="hotList" />
@@ -31,6 +32,8 @@ import {
   getHomeCategoryAPI,
   getHomeHotAPI,
 } from '@/api/home';
+
+// const handleLogin = () => uni.redirectTo({ url: '/pages/common/login'});
 
 const isLoading = ref(false);
 const isRefresherTriggered = ref(false);

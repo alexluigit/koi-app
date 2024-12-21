@@ -4,14 +4,10 @@ import type {
   HttpRequestConfig,
   HttpResponse,
 } from 'luch-request';
-import { useUserStore } from '@/store';
 import { getToken } from '@/utils/auth';
 import storage from '@/utils/storage';
 import { showMessage } from './status';
 
-let requestQueue: (() => void)[] = [];
-
-// 防止重复提交
 const repeatSubmit = (config: HttpRequestConfig) => {
   const requestObj = {
     url: config.url,
@@ -35,32 +31,6 @@ const repeatSubmit = (config: HttpRequestConfig) => {
     else {
       storage.setJSON('sessionObj', requestObj);
     }
-  }
-};
-
-let isRefreshing: boolean = false;
-
-const refreshToken = async (http: HttpRequestAbstract, config: HttpRequestConfig) => {
-  // 是否在获取token中,防止重复获取
-  if (!isRefreshing) {
-    // 修改登录状态为true
-    isRefreshing = true;
-    await useUserStore().authLogin();
-    // 登录完成之后，开始执行队列请求
-    requestQueue.forEach(cb => cb());
-    // 重试完了清空这个队列
-    requestQueue = [];
-    isRefreshing = false;
-    // 重新执行本次请求
-    return http.request(config);
-  }
-  else {
-    return new Promise((resolve) => {
-      // 将resolve放进队列，用一个函数形式来保存，等登录后直接执行
-      requestQueue.push(() => {
-        resolve(http.request(config));
-      });
-    });
   }
 };
 
@@ -99,12 +69,10 @@ function requestInterceptors(http: HttpRequestAbstract) {
 function responseInterceptors(http: HttpRequestAbstract) {
   http.interceptors.response.use(
     async (response: HttpResponse) => {
-      /* 对响应成功做点什么 可使用async await 做异步操作 */
       const data = response.data;
       const config = response.config;
       const custom = config?.custom;
       const statusCode = response.statusCode;
-      if (statusCode === 401) refreshToken(http, config);
       if (custom?.loading) uni.hideLoading();
       if (statusCode >= 200 && statusCode < 300) {
         return response || {};

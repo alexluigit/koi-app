@@ -1,4 +1,4 @@
-import type { ShareOptions } from './types';
+import type { ShareOptions } from '@/types/network';
 
 /**
  * 小程序分享

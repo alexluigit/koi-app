@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "koi-app",
   "appid": "",
   "description": "",
   "versionName": "1.0.0",
@@ -55,12 +55,11 @@
   /* 小程序特有相关 */
   "mp-weixin":
   {
-    "appid": "wx8313611286832fe9",
-    "setting":
-    {
-      "urlCheck": false
-    },
+    "appid": "wxce856009bda80a13",
+    // "appid": "wxb09661669ed44ad8",
+    "setting": { "urlCheck": false },
     "usingComponents": true,
+    "lazyCodeLoading": "requiredComponents",
     "darkmode" : true,
     "themeLocation" : "theme.json"
   },
