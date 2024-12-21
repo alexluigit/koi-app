@@ -41,6 +41,14 @@ export function post<T = any>(url: string, config?: HttpRequestConfig): Promise<
   return request({ ...config, url, method: 'POST' });
 }
 
+export function put<T = any>(url: string, config?: HttpRequestConfig): Promise<T> {
+  return request({ ...config, url, method: 'PUT' });
+}
+
+export function del<T = any>(url: string, config?: HttpRequestConfig): Promise<T> {
+  return request({ ...config, url, method: 'DELETE' });
+}
+
 export function upload<T = any>(url: string, config?: HttpRequestConfig): Promise<T> {
   return request({ ...config, url, method: 'UPLOAD' });
 }

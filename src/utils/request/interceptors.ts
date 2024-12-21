@@ -5,7 +5,6 @@ import type {
   HttpResponse,
 } from 'luch-request';
 import { useUserStore } from '@/store';
-import { getToken } from '@/utils/auth';
 import storage from '@/utils/storage';
 import { showMessage } from './status';
 
@@ -69,10 +68,8 @@ function requestInterceptors(http: HttpRequestAbstract) {
         'source-client': 'miniapp',
       };
       // #endif
-      const isToken = custom?.auth === false;
-      if (getToken() && !isToken && config.header) {
-        config.header.token = getToken();
-      }
+      const token = useUserStore().profile?.token;
+      if (token) config.header.Authorization = token;
       if (custom?.loading) {
         uni.showLoading({
           title: '加载中',

@@ -16,6 +16,7 @@ function setupStore(app: App) {
   app.use(store);
 }
 
+export * from './modules/address';
 export * from './modules/app';
 export * from './modules/user';
 export default setupStore;
