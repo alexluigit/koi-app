@@ -1,4 +1,4 @@
-import type { ProductItem } from './global';
+import type { ProductItem } from '@/types/product';
 
 /** 首页-广告区域数据类型 */
 export interface BannerItem {

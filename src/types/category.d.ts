@@ -1,4 +1,4 @@
-import type { ProductItem } from './global';
+import type { ProductItem } from '@/types/product';
 
 /** 一级分类项 */
 export interface CategoryTopItem {

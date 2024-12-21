@@ -4,9 +4,7 @@ const storage = {
       uni.setStorageSync(key, value);
   },
   get(key: string | null) {
-    if (key === null)
-      return null;
-
+    if (key === null) return null;
     return uni.getStorageSync(key);
   },
   setJSON(key: any, jsonValue: any) {
