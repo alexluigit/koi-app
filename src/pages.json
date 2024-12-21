@@ -13,7 +13,8 @@
       "path": "pages/tab/user/user",
       "style": { "navigationStyle": "custom" },
       "needLogin": true
-    }
+    },
+    { "path": "pages/tab/user/settings", "style": { "navigationBarTitleText": "用户设置" } },
   ],
   "subPackages": [
     {
