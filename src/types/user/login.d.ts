@@ -11,18 +11,18 @@ export interface LoginWxMinParams {
   iv?: string;
 }
 
+export interface LoginByCodeParams {
+  code: string;
+}
+
+export interface LoginByCodeResult {
+  [key: string]: any;
+}
+
 export type LoginResult = BaseProfile & {
   mobile: string;
   token: string;
 };
-
-export interface LoginByCodeReq {
-  code: string;
-}
-
-export interface LoginByCodeRes {
-  [key: string]: any;
-}
 
 export type providerType =
   | 'weixin'

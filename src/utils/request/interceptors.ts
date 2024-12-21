@@ -4,6 +4,7 @@ import type {
   HttpRequestConfig,
   HttpResponse,
 } from 'luch-request';
+import { useUserStore } from '@/store';
 import { getToken } from '@/utils/auth';
 import storage from '@/utils/storage';
 import { showMessage } from './status';
@@ -31,6 +32,28 @@ const repeatSubmit = (config: HttpRequestConfig) => {
     else {
       storage.setJSON('sessionObj', requestObj);
     }
+  }
+};
+
+let isRefreshing: boolean = false;
+let requestQueue: (() => void)[] = [];
+const refreshToken = async (http: HttpRequestAbstract, config: HttpRequestConfig) => {
+  if (!isRefreshing) {
+    isRefreshing = true;
+    const userStore = useUserStore();
+    userStore.clearProfile();
+    await useUserStore().authLogin();
+    requestQueue.forEach(cb => cb());
+    requestQueue = [];
+    isRefreshing = false;
+    return http.request(config);
+  }
+  else {
+    return new Promise((resolve) => {
+      requestQueue.push(() => {
+        resolve(http.request(config));
+      });
+    });
   }
 };
 
@@ -74,6 +97,7 @@ function responseInterceptors(http: HttpRequestAbstract) {
       const custom = config?.custom;
       const statusCode = response.statusCode;
       if (custom?.loading) uni.hideLoading();
+      if (statusCode === 401) await refreshToken(http, config);
       if (statusCode >= 200 && statusCode < 300) {
         return response || {};
       }
