@@ -46,7 +46,7 @@
           <radio class="radio" color="#28bb9c" :checked="isAgreePrivacy" />
           <text>登录/注册即视为你同意锦鲤福利</text>
         </label>
-        <navigator class="link" hover-class="none" url="./protocol">
+        <navigator class="link" hover-class="none" url="/pages/common/protocol">
           《服务条款》
         </navigator>
         和

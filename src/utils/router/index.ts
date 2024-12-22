@@ -2,7 +2,7 @@ import pagesJson from '@/pages.json';
 
 export const HOME_PATH = '/pages/home/home';
 export const USER_PATH = '/pages/user/user';
-export const LOGIN_PATH = '/pages/common/login';
+export const LOGIN_PATH = '/pages/account/login';
 export const ERROR404_PATH = '/pages/common/404';
 
 /**

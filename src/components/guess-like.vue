@@ -9,7 +9,7 @@
       v-for="item in guessList"
       :key="item.id"
       class="guess-item"
-      :url="`/pages/common/product/product?id=${item.id}`"
+      :url="`/pages/product/product?id=${item.id}`"
     >
       <image class="image" mode="aspectFill" :src="item.picture" />
       <view class="name">

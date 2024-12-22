@@ -102,7 +102,7 @@
           :key="item.id"
           class="product-result"
           hover-class="none"
-          :url="`/pages/common/product/product?id=${item.id}`"
+          :url="`/pages/product/product?id=${item.id}`"
         >
           <image class="image" mode="aspectFill" :src="item.picture" />
           <view class="name ellipsis">
