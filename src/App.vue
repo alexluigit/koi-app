@@ -16,6 +16,7 @@ onHide(() => {
 </script>
 
 <style lang="scss">
+@import 'nutui-uniapp/styles/index.scss';
 @import '@/static/styles/fonts.scss';
 @import '@/static/styles/common.scss';
 </style>

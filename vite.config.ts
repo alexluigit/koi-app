@@ -7,7 +7,6 @@ import { createViteProxy } from './build/proxy';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }): UserConfig => {
-  // mode: 区分生产环境还是开发环境
   console.log('command, mode -> ', command, mode);
 
   const { UNI_PLATFORM } = process.env;
@@ -18,16 +17,12 @@ export default defineConfig(({ command, mode }): UserConfig => {
 
   const isBuild = process.env.NODE_ENV === 'production';
   return {
-    // 自定义env目录
     envDir: './env',
     resolve: {
-      // https://cn.vitejs.dev/config/#resolve-alias
       alias: {
-        // 设置别名
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-    // vite 相关配置
     server: {
       port: Number.parseInt(env.VITE_APP_PORT, 10),
       hmr: true,
@@ -36,12 +31,10 @@ export default defineConfig(({ command, mode }): UserConfig => {
       // proxy only works on h5, probably an issue of `vite-plugin-uni`
       proxy: createViteProxy(env),
     },
-    // 设置scss的api类型为modern-compiler
     css: {
       preprocessorOptions: {
-        scss: {
+        sass: {
           api: 'modern-compiler',
-          // 消除一些不必要的警告
           silenceDeprecations: ['legacy-js-api'],
         },
       },

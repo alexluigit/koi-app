@@ -1,5 +1,5 @@
 import type { PluginOption } from 'vite';
-import uni from '@dcloudio/vite-plugin-uni';
+import UniApp from '@dcloudio/vite-plugin-uni';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import viteImagemin from 'vite-plugin-imagemin';
@@ -23,7 +23,7 @@ export default function createVitePlugins(isBuild: boolean) {
       dirs: ['src/components', 'src/pages/**/**/components'],
       dts: 'types/components.d.ts',
     }),
-    uni(),
+    UniApp(),
     ViteRestart({ restart: ['vite.config.ts'] }),
   ];
 
