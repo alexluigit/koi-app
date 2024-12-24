@@ -140,7 +140,7 @@
       <view class="addcart" @tap="console.log('Add to cart not implement yet')">
         加入购物车
       </view>
-      <view class="payment" @tap="console.log('Buy directly not implement yet')">
+      <view class="payment" desc="" @tap="isSkuVisible = true">
         立即购买
       </view>
     </view>
@@ -151,6 +151,16 @@
     <address-panel v-if="popupName === 'address'" @close="popup?.close()" />
     <service-panel v-if="popupName === 'service'" @close="popup?.close()" />
   </uni-popup>
+
+  <nut-sku
+    ref="skuRef"
+    v-model:visible="isSkuVisible"
+    :sku="specOptions"
+    :goods="selectedSku"
+    :btn-options="['buy', 'cart']"
+    @select-sku="selectSku"
+    @click-btn-operate="clickBtnOperate"
+  />
 </template>
 
 <script setup lang="ts">
@@ -159,11 +169,59 @@ import { getProductByIdAPI } from '@/api/product';
 
 const query = defineProps<{ id: string }>();
 const { safeAreaInsets } = uni.getWindowInfo();
-
+const isSkuVisible = ref(false);
+const skuRef = ref();
+const specOptions = ref(); // consumed by nut-sku
 const productResult = ref<ProductResult>();
+const selectedSku = computed(() => {
+  if (specOptions.value === undefined) return { skuId: '' };
+  const specNames = specOptions.value.map(v => ({
+    id: v.id,
+    name: v.name,
+    selected: v.list.find(s => s.active === true).name,
+  }));
+  const matchedSku = productResult.value?.skus.find(sku =>
+    sku.specs.every((spec, idx) => spec.valueName === specNames[idx].selected));
+  if (!matchedSku) {
+    console.error('No matching sku, check the product info requested from server');
+    return {};
+  }
+  else {
+    return {
+      skuId: matchedSku.id,
+      price: matchedSku.price,
+      imagePath: matchedSku.picture,
+    };
+  }
+});
+
+const selectSku = (options) => {
+  skuRef.value.resetCount();
+  const { sku, parentIndex } = options;
+  if (sku.disable) return false;
+  specOptions.value[parentIndex].list.forEach((s) => {
+    s.active = s.id === sku.id;
+  });
+};
+
+const clickBtnOperate = (op: string) => {
+  console.log('点击了操作按钮', op);
+  console.log(selectedSku.value);
+};
+
 const getProductDetails = async () => {
   const res = await getProductByIdAPI(query.id);
   productResult.value = res;
+  specOptions.value = res.specs.map((v, idx) => ({
+    id: idx,
+    name: v.name,
+    list: v.values.map((v, listIdx) => ({
+      name: v.name,
+      id: listIdx,
+      active: listIdx === 0,
+      disable: false,
+    })),
+  }));
 };
 
 onLoad(() => getProductDetails());
