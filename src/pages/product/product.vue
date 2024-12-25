@@ -40,11 +40,13 @@
 
       <!-- Action panel -->
       <view class="action">
-        <view class="item arrow" @tap="console.log('SKU select not implement yet')">
+        <view class="item arrow" @tap="isSkuVisible = true">
           <text class="label">
             选择
           </text>
-          <text class="text ellipsis" />
+          <text class="text ellipsis">
+            {{ specText }}
+          </text>
         </view>
         <view class="item arrow" @tap="openPopup('address')">
           <text class="label">
@@ -170,25 +172,14 @@ const isSkuVisible = ref(false);
 const specOptions = ref(); // consumed by nut-sku
 const productResult = ref<ProductResult>();
 const selectedSku = computed(() => {
-  if (specOptions.value === undefined) return { skuId: '' };
-  const specNames = specOptions.value.map(v => ({
-    id: v.id,
-    name: v.name,
-    selected: v.list.find(s => s.active === true).name,
-  }));
   const matchedSku = productResult.value?.skus.find(sku =>
-    sku.specs.every((spec, idx) => spec.valueName === specNames[idx].selected));
-  if (!matchedSku) {
-    console.error('No matching sku, check the product info requested from server');
-    return { skuId: '' };
-  }
-  else {
-    return {
-      skuId: matchedSku.id,
-      price: matchedSku.price,
-      imagePath: matchedSku.picture,
-    };
-  }
+    sku.specs.every((spec, i) =>
+      spec.valueName === specOptions.value[i].list.find(s => s.active).name));
+  return {
+    skuId: matchedSku?.id,
+    price: matchedSku?.price,
+    imagePath: matchedSku?.picture,
+  };
 });
 
 const selectSku = (options) => {
@@ -199,14 +190,20 @@ const selectSku = (options) => {
   });
 };
 
-const buyOrAddCart = async (op: { type: string; value: number }) => {
-  const { type, value } = op;
-  if (type === 'cart') {
-    await addToCart({ skuId: selectedSku.value.skuId, count: value });
-    uni.showToast({ title: '添加成功' });
-    isSkuVisible.value = false;
+const buyOrAddCart = async (action: { type: string; value: number }) => {
+  const { type, value } = action;
+  switch (type) {
+    case 'cart':
+      await addToCart({ skuId: selectedSku.value.skuId!, count: value });
+      uni.showToast({ title: '添加成功' });
+      isSkuVisible.value = false;
+      break;
+    case 'buy':
+      uni.navigateTo({
+        url: `/pages/order/create?skuId=${selectedSku.value.skuId}&count=${value}`,
+      });
+      break;
   }
-  if (type === 'buy') console.log('not implemented yet');
 };
 
 const getProductDetails = async () => {
@@ -237,6 +234,10 @@ const onTapImage = (url: string) => {
     urls: productResult.value!.mainPictures,
   });
 };
+
+const specText = computed(() =>
+  specOptions.value?.map(v =>
+    v.list.find(s => s.active).name).join(' ').trim() || '请选择规格');
 
 const popup = ref<{
   open: (type?: UniHelper.UniPopupType) => void;

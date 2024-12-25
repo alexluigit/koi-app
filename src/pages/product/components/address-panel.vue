@@ -1,6 +1,6 @@
 <template>
   <view class="address-panel">
-    <text class="close icon-close" />
+    <text class="close icon-close" @tap="emit('close')" />
     <view class="title">
       配送至
     </view>
@@ -45,6 +45,7 @@
 </template>
 
 <script setup lang="ts">
+const emit = defineEmits<{ (event: 'close'): void }>();
 </script>
 
 <style lang="scss">

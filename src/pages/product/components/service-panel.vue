@@ -35,9 +35,7 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits<{
-  (event: 'close'): void;
-}>();
+const emit = defineEmits<{ (event: 'close'): void }>();
 </script>
 
 <style lang="scss">
