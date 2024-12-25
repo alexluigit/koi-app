@@ -96,7 +96,7 @@ page {
   .arrow::after {
     position: absolute;
     top: 50%;
-    font-family: erabbit !important;
+    font-family: koi !important;
     font-size: 32rpx;
     color: #ccc;
     content: '\e6c2';

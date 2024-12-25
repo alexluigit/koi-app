@@ -22,8 +22,8 @@
       "root": "pages/account",
       "pages": [
         { "path": "login", "style": { "navigationBarTitleText": "登录" } },
-        { "path": "settings", "style": { "navigationBarTitleText": "用户设置" } }
-        { "path": "address", "style": { "navigationBarTitleText": "管理收货地址" } }
+        { "path": "settings", "style": { "navigationBarTitleText": "用户设置" } },
+        { "path": "address", "style": { "navigationBarTitleText": "管理收货地址" } },
         { "path": "address-form", "style": { "navigationBarTitleText": "" } }
       ]
     },

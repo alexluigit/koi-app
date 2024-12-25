@@ -132,14 +132,11 @@
         <text class="icon-handset" />客服
       </button>
       <!-- #endif -->
-      <navigator class="icons-button" url="/pages/cart/cart2" open-type="navigate">
+      <navigator class="icons-button" url="/pages/cart/cart" open-type="switchTab">
         <text class="icon-cart" />购物车
       </navigator>
     </view>
     <view class="buttons">
-      <view class="addcart" @tap="console.log('Add to cart not implement yet')">
-        加入购物车
-      </view>
       <view class="payment" desc="" @tap="isSkuVisible = true">
         立即购买
       </view>
@@ -153,24 +150,23 @@
   </uni-popup>
 
   <nut-sku
-    ref="skuRef"
     v-model:visible="isSkuVisible"
     :sku="specOptions"
     :goods="selectedSku"
-    :btn-options="['buy', 'cart']"
+    :btn-options="['cart', 'buy']"
     @select-sku="selectSku"
-    @click-btn-operate="clickBtnOperate"
+    @click-btn-operate="buyOrAddCart"
   />
 </template>
 
 <script setup lang="ts">
 import type { ProductResult } from '@/types/product';
+import { addToCart } from '@/api/cart';
 import { getProductByIdAPI } from '@/api/product';
 
 const query = defineProps<{ id: string }>();
 const { safeAreaInsets } = uni.getWindowInfo();
 const isSkuVisible = ref(false);
-const skuRef = ref();
 const specOptions = ref(); // consumed by nut-sku
 const productResult = ref<ProductResult>();
 const selectedSku = computed(() => {
@@ -184,7 +180,7 @@ const selectedSku = computed(() => {
     sku.specs.every((spec, idx) => spec.valueName === specNames[idx].selected));
   if (!matchedSku) {
     console.error('No matching sku, check the product info requested from server');
-    return {};
+    return { skuId: '' };
   }
   else {
     return {
@@ -196,7 +192,6 @@ const selectedSku = computed(() => {
 });
 
 const selectSku = (options) => {
-  skuRef.value.resetCount();
   const { sku, parentIndex } = options;
   if (sku.disable) return false;
   specOptions.value[parentIndex].list.forEach((s) => {
@@ -204,9 +199,14 @@ const selectSku = (options) => {
   });
 };
 
-const clickBtnOperate = (op: string) => {
-  console.log('点击了操作按钮', op);
-  console.log(selectedSku.value);
+const buyOrAddCart = async (op: { type: string; value: number }) => {
+  const { type, value } = op;
+  if (type === 'cart') {
+    await addToCart({ skuId: selectedSku.value.skuId, count: value });
+    uni.showToast({ title: '添加成功' });
+    isSkuVisible.value = false;
+  }
+  if (type === 'buy') console.log('not implemented yet');
 };
 
 const getProductDetails = async () => {
@@ -295,7 +295,7 @@ page {
     position: absolute;
     top: 50%;
     right: 30rpx;
-    font-family: erabbit !important;
+    font-family: koi !important;
     font-size: 32rpx;
     color: #ccc;
     content: '\e6c2';
