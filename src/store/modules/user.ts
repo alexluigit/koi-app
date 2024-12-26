@@ -7,6 +7,7 @@ export const useUserStore = defineStore('user', () => {
   const setProfile = (val: LoginResult) => profile.value = val;
   const clearProfile = () => profile.value = undefined;
   const login = async (data: LoginParams) => await LoginAPI.postLoginAPI(data);
+  const isLoggedIn = () => !!profile.value;
   const wxLogin = async (data: LoginWxMinParams) => await LoginAPI.postLoginWxMinAPI(data);
   const sampleLogin = async (phoneNumber: string) =>
     await LoginAPI.postLoginWxMinSimpleAPI(phoneNumber);
@@ -29,10 +30,11 @@ export const useUserStore = defineStore('user', () => {
     setProfile,
     clearProfile,
     login,
+    isLoggedIn,
     wxLogin,
     sampleLogin,
     authLogin,
   };
 }, {
-  persist: false,
+  persist: true,
 });

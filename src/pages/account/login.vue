@@ -61,12 +61,12 @@
 <script setup lang="ts">
 import type { LoginResult } from '@/types/user/login';
 import { useUserStore } from '@/store';
-import { USER_PATH } from '@/utils/router';
+import { isTabBarPath, LOGIN_PATH, sanitizePath, USER_PATH } from '@/utils/router';
 
 const userStore = useUserStore();
 const isAgreePrivacy = ref(false);
 const isAgreePrivacyShakeY = ref(false);
-const checkedAgreePrivacy = async () => {
+const checkedAgreePrivacy = async () => { // TODO: doesn't work on H5
   if (!isAgreePrivacy.value) {
     uni.showToast({
       icon: 'none',
@@ -79,13 +79,23 @@ const checkedAgreePrivacy = async () => {
     return Promise.reject(console.error('请先阅读并勾选协议'));
   }
 };
+let redirectPath = USER_PATH;
 const loginSuccess = (profile: LoginResult) => {
   userStore.setProfile(profile);
   uni.showToast({ icon: 'success', title: '登录成功' });
+  console.log(`going to ${redirectPath}`);
   setTimeout(() => {
-    uni.switchTab({ url: USER_PATH });
+    if (isTabBarPath(redirectPath)) uni.switchTab({ url: redirectPath });
+    else uni.redirectTo({ url: redirectPath });
   }, 500);
 };
+
+onLoad(async (options: any) => {
+  if (options.redirect
+    && sanitizePath(options.redirect) !== LOGIN_PATH) {
+    redirectPath = decodeURIComponent(options.redirect);
+  }
+});
 
 // #ifdef MP-WEIXIN
 let code = '';

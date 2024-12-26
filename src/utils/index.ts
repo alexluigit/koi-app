@@ -1,4 +1,3 @@
-export * from './auth';
 export * from './modals';
 export * from './mp';
 export * from './permission';

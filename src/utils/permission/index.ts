@@ -1,18 +1,14 @@
-import { isLogin } from '@/utils/auth';
+import { useUserStore } from '@/store';
 import {
   ERROR404_PATH,
   isPathExists,
   LOGIN_PATH,
-  removeQueryString,
   routes,
+  sanitizePath,
 } from '@/utils/router';
 
 const whiteList = ['/'];
-routes.forEach((item) => {
-  if (item.needLogin !== true) {
-    whiteList.push(item.path);
-  }
-});
+routes.forEach(r => !r.login && whiteList.push(r.path));
 
 /**
  * Permission check
@@ -25,9 +21,9 @@ export function hasPerm(path: string = ''): boolean {
     return false;
   }
   const hasPermission
-    = whiteList.includes(removeQueryString(path)) || isLogin();
+        = whiteList.includes(sanitizePath(path)) || useUserStore().isLoggedIn();
   if (!hasPermission) {
-    uni.redirectTo({
+    uni.redirectTo({ // pass in the original path
       url: `${LOGIN_PATH}?redirect=${encodeURIComponent(path)}`,
     });
   }

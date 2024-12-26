@@ -8,7 +8,7 @@ export const ERROR404_PATH = '/pages/common/404';
 /**
  * Parse the routes defined in pages.json
  * @param {object} pagesJson
- * @returns [{"path": "/pages/home/home","needLogin": false},...]
+ * @returns [{"path": "/pages/home/home","login": false},...]
  */
 function parseRoutes(pagesJson = {} as any) {
   if (!pagesJson.pages) {
@@ -23,7 +23,7 @@ function parseRoutes(pagesJson = {} as any) {
     for (let i = 0; i < pages.length; i++) {
       routes.push({
         path: rootPath ? `/${rootPath}/${pages[i].path}` : `/${pages[i].path}`,
-        needLogin: pages[i].needLogin === true,
+        login: pages[i].login === true,
       });
     }
     return routes;
@@ -59,7 +59,7 @@ export function currentRoute(): string {
  * @param {string} path - the original path
  * @returns {string} path get `?*` stripped
  */
-export function removeQueryString(path: string = ''): string {
+export function sanitizePath(path: string = ''): string {
   return path.split('?')[0];
 }
 
@@ -69,7 +69,7 @@ export function removeQueryString(path: string = ''): string {
  * @returns {boolean} whether the path exists or not
  */
 export function isPathExists(path: string = ''): boolean {
-  const cleanPath = removeQueryString(path);
+  const cleanPath = sanitizePath(path);
   return routes.some(item => item.path === cleanPath);
 }
 
@@ -78,7 +78,7 @@ export function isPathExists(path: string = ''): boolean {
  * @param {string} path
  */
 export function isTabBarPath(path: string = ''): boolean {
-  const cleanPath = removeQueryString(path);
+  const cleanPath = sanitizePath(path);
   return (
     pagesJson.tabBar?.list?.some(
       item => `/${item.pagePath}` === cleanPath,
