@@ -42,6 +42,20 @@
         设置
       </navigator>
     </view>
+
+    <navigator url="/pages/account/card" hover-class="none" class="nickname">
+      <uni-card
+        v-if="userStore.profile"
+        title=" 锦鲤券"
+        extra="我的券包"
+      >
+        <button class="button">
+          <text class="icon icon-gift" />
+          享锦鲤福利超值兑换权益
+        </button>
+      </uni-card>
+    </navigator>
+
     <!-- 我的订单 -->
     <view class="orders">
       <view class="title">
