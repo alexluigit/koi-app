@@ -35,6 +35,15 @@
       "pages": [
         { "path": "product", "style": { "navigationBarTitleText": "商品详情" } }
       ]
+    },
+    {
+      "root": "pages/order",
+      "pages": [
+        { "path": "create", "style": { "navigationBarTitleText": "创建订单" }, "login": true },
+        { "path": "detail", "style": { "navigationBarTitleText": "订单详情" }, "login": true },
+        { "path": "payment", "style": { "navigationBarTitleText": "支付结果" }, "login": true },
+        { "path": "all", "style": { "navigationBarTitleText": "全部订单" }, "login": true }
+      ]
     }
   ],
   "preloadRule": {

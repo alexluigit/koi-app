@@ -14,6 +14,7 @@ declare module 'vue' {
     HomeCategoryPanel: typeof import('./../src/pages/home/components/home-category-panel.vue')['default']
     HomeHotPanel: typeof import('./../src/pages/home/components/home-hot-panel.vue')['default']
     HomeNavbar: typeof import('./../src/pages/home/components/home-navbar.vue')['default']
+    OrderItemsTab: typeof import('./../src/pages/order/components/order-items-tab.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ServicePanel: typeof import('./../src/pages/product/components/service-panel.vue')['default']
