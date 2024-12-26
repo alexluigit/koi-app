@@ -110,10 +110,8 @@ function checkPrivacySetting() {
 // 打开隐私政策
 function openPrivacyContract() {
   wx.openPrivacyContract({
-    success: () => {}, // 打开成功
-    fail: (e: any) => {
-      uni.$u.toast(`打开失败:${e}`);
-    }, // 打开失败
+    success: () => {},
+    fail: (e: any) => uni.showToast({ title: `打开失败:${e}` }),
   });
 }
 

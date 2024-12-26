@@ -6,7 +6,7 @@ import type {
 } from 'luch-request';
 import { useUserStore } from '@/store';
 import storage from '@/utils/storage';
-import { showMessage } from './status';
+import { httpErrorMessages } from './status';
 
 const repeatSubmit = (config: HttpRequestConfig) => {
   const requestObj = {
@@ -98,15 +98,16 @@ function responseInterceptors(http: HttpRequestAbstract) {
       if (statusCode >= 200 && statusCode < 300) {
         return response || {};
       }
-      if (custom?.toast !== false) uni.$u.toast(data.message);
+      if (custom?.toast !== false) uni.showToast({ icon: 'error', title: data.message });
       return Promise.reject(data);
     },
     (response: HttpError) => {
+      const statusCode = response.statusCode;
       const custom = response.config?.custom;
       if (custom?.loading !== false) uni.hideLoading();
       if (custom?.toast !== false) {
-        const message = response.statusCode ? showMessage(response.statusCode) : '网络连接异常,请稍后再试!';
-        uni.$u.toast(message);
+        const message = statusCode ? httpErrorMessages(statusCode) : '网络连接异常,请稍后再试!';
+        uni.showToast({ icon: 'error', title: message });
       }
       return Promise.reject(response);
     },
