@@ -156,14 +156,43 @@
     :sku="specOptions"
     :goods="selectedSku"
     :btn-options="['cart', 'buy']"
+    :btn-extra-text="skuOutOfStockText"
+    @change-stepper="changeSkuStepper"
     @select-sku="selectSku"
-    @click-btn-operate="buyOrAddCart"
-  />
+  >
+    <template #skuHeaderPrice>
+      <div>
+        <nut-price :price="selectedSku.price" :need-symbol="true" :thousands="false" />
+        <span class="tag" />
+      </div>
+    </template>
+    <template #skuHeaderExtra>
+      <span class="nut-sku-header-right-extra">编号：{{ selectedSku.skuId }} </span>
+    </template>
+    <template #skuOperate>
+      <view class="sku-operate-box">
+        <nut-button
+          class="sku-operate-item" custom-color="#fe9831"
+          :disabled="(selectedSku.inventory || 0) === 0"
+          @tap="addToCart"
+        >
+          加入购物车
+        </nut-button>
+        <nut-button
+          class="sku-operate-item" custom-color="#27ba9b"
+          :disabled="(selectedSku.inventory || 0) === 0"
+          @tap="buyNow"
+        >
+          立即购买
+        </nut-button>
+      </view>
+    </template>
+  </nut-sku>
 </template>
 
 <script setup lang="ts">
 import type { ProductResult } from '@/types/product';
-import { addToCart } from '@/api/cart';
+import * as CartAPI from '@/api/cart';
 import { getProductByIdAPI } from '@/api/product';
 
 const query = defineProps<{ id: string }>();
@@ -171,6 +200,8 @@ const { safeAreaInsets } = uni.getWindowInfo();
 const isSkuVisible = ref(false);
 const specOptions = ref(); // consumed by nut-sku
 const productResult = ref<ProductResult>();
+const skuCount = ref(1);
+const changeSkuStepper = (count: number) => skuCount.value = count;
 const selectedSku = computed(() => {
   const matchedSku = productResult.value?.skus.find(sku =>
     sku.specs.every((spec, i) =>
@@ -178,9 +209,12 @@ const selectedSku = computed(() => {
   return {
     skuId: matchedSku?.id,
     price: matchedSku?.price,
+    inventory: matchedSku?.inventory,
     imagePath: matchedSku?.picture,
   };
 });
+const skuOutOfStockText = computed(() =>
+  (selectedSku.value.inventory || 0) > 0 ? '' : '所选商品暂时无货');
 
 const selectSku = (options) => {
   const { sku, parentIndex } = options;
@@ -190,22 +224,23 @@ const selectSku = (options) => {
   });
 };
 
-const buyOrAddCart = async (action: { type: string; value: number }) => {
-  const { type, value } = action;
-  switch (type) {
-    case 'cart':
-      await addToCart({ skuId: selectedSku.value.skuId!, count: value });
-      uni.showToast({ title: '添加成功' });
-      isSkuVisible.value = false;
-      break;
-    case 'buy':
-      uni.navigateTo({
-        url: `/pages/order/create?skuId=${selectedSku.value.skuId}&count=${value}`,
-      });
-      break;
-  }
+const addToCart = async () => {
+  if ((selectedSku.value.inventory || 0) === 0) return;
+  await CartAPI.addToCart({ skuId: selectedSku.value.skuId!, count: skuCount.value });
+  uni.showToast({ title: '添加成功' });
+  isSkuVisible.value = false;
 };
 
+const buyNow = async () => {
+  if ((selectedSku.value.inventory || 0) === 0) return;
+  uni.navigateTo({
+    url: `/pages/order/create?skuId=${selectedSku.value.skuId}&count=${skuCount.value}`,
+  });
+};
+
+// TODO: 1. optimize the alg
+//       2. get the disable specs
+//       3. select the first item that has stock
 const getProductDetails = async () => {
   const res = await getProductByIdAPI(query.id);
   productResult.value = res;
@@ -564,6 +599,24 @@ page {
       display: block;
       font-size: 34rpx;
     }
+  }
+}
+
+.sku-operate-box {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  padding: 18rpx;
+  margin: auto;
+  text-align: center;
+  background: $white;
+  border-top: 0;
+
+  .sku-operate-item {
+    flex: 1;
+    width: 220rpx;
   }
 }
 </style>
