@@ -27,3 +27,7 @@ unpackage
 # pnpm-lock.yaml
 yarn.lock
 package-lock.json
+
+#env
+/env/.env.development
+/env/.env.production
