@@ -43,7 +43,7 @@
       </navigator>
     </view>
 
-    <navigator url="/pages/account/card" hover-class="none" class="nickname">
+    <navigator url="/pages/account/gift-card" hover-class="none" class="nickname">
       <uni-card
         v-if="userStore.profile"
         title=" 锦鲤券"

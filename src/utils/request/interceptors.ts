@@ -94,7 +94,7 @@ function responseInterceptors(http: HttpRequestAbstract) {
       const custom = config?.custom;
       const statusCode = response.statusCode;
       if (custom?.loading) uni.hideLoading();
-      if (statusCode === 401) await refreshToken(http, config);
+      // if (statusCode === 401) await refreshToken(http, config);
       if (statusCode >= 200 && statusCode < 300) {
         return response || {};
       }

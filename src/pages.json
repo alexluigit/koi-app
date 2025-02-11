@@ -20,7 +20,8 @@
         { "path": "login", "style": { "navigationBarTitleText": "登录" } },
         { "path": "settings", "style": { "navigationBarTitleText": "用户设置" } },
         { "path": "address", "style": { "navigationBarTitleText": "管理收货地址" }, "login": true },
-        { "path": "address-form", "style": { "navigationBarTitleText": "" } }
+        { "path": "address-form", "style": { "navigationBarTitleText": "" } },
+        { "path": "gift-card", "style": { "navigationBarTitleText": "我的锦鲤券" } }
       ]
     },
     {

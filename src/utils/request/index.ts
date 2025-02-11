@@ -1,4 +1,3 @@
-// 引入配置
 import type { HttpRequestConfig, HttpResponse } from 'luch-request';
 import type { IResponse } from './types';
 import Request from 'luch-request';
@@ -8,7 +7,8 @@ const http = new Request();
 
 export function setupRequest() {
   http.setConfig((defaultConfig: HttpRequestConfig) => {
-    defaultConfig.baseURL = import.meta.env.VITE_API_BASE_URL;
+    defaultConfig.baseURL = defaultConfig.baseURL || import.meta.env.VITE_API_BASE_URL;
+    // defaultConfig.baseURL = import.meta.env.VITE_API_BASE_URL;
     // #ifdef H5
     if (import.meta.env.VITE_APP_PROXY === 'true') {
       defaultConfig.baseURL = import.meta.env.VITE_API_PREFIX;
@@ -24,6 +24,7 @@ export function request<T = any>(config: HttpRequestConfig): Promise<T> {
   return new Promise((resolve, reject) => {
     http.request(config).then((res: HttpResponse<IResponse<T>>) => {
       console.log('[ res ] >', res);
+      // TODO: fix this!
       const { result } = res.data;
       resolve(result as T);
     }).catch((err: any) => {

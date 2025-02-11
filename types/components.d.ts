@@ -11,6 +11,7 @@ declare module 'vue' {
     AgreePrivacy: typeof import('./../src/components/agree-privacy.vue')['default']
     CustomSwiper: typeof import('./../src/components/custom-swiper.vue')['default']
     GuessLike: typeof import('./../src/components/guess-like.vue')['default']
+    GuessLikeNew: typeof import('./../src/components/guess-like-new.vue')['default']
     HomeCategoryPanel: typeof import('./../src/pages/home/components/home-category-panel.vue')['default']
     HomeHotPanel: typeof import('./../src/pages/home/components/home-hot-panel.vue')['default']
     HomeNavbar: typeof import('./../src/pages/home/components/home-navbar.vue')['default']
